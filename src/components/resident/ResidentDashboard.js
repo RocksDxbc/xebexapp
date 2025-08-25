@@ -1,6 +1,7 @@
-// Painel do Morador
-import React from 'react';
+import { useState, useEffect } from 'react';
+import { collection, query, where, onSnapshot, doc, updateDoc } from 'firebase';
 
+// Painel do Morador
 const ResidentDashboard = ({ setView, user, db, appId }) => {
   const [packages, setPackages] = useState([]);
   const [showModal, setShowModal] = useState(false);
