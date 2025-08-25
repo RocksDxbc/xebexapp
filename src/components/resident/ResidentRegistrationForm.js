@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { doc, setDoc } from 'firebase/firestore';
+import ScreenLayout from '../common/ScreenLayout';  
 // Formulário de Cadastro de Morador
 const ResidentRegistrationForm = ({ setView, db, appId, auth }) => {
   const [name, setName] = useState('');
