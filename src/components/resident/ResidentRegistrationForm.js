@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { doc, setDoc } from 'firebase/firestore';
 import ScreenLayout from '../common/ScreenLayout';  
 // Formulário de Cadastro de Morador
