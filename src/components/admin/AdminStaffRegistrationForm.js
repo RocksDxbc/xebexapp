@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { doc, setDoc } from 'firebase/firestore';
+import Navbar from '../common/Navbar';
 // Formulário de Cadastro de Funcionário (para o Admin)
 const AdminStaffRegistrationForm = ({ setView, db, appId }) => {
   const [name, setName] = useState('');
