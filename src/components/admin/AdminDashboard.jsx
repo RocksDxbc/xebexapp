@@ -1,6 +1,9 @@
 import React from 'react';
-import Navbar from '../common/Navbar';
-import ScreenLayout from '../common/ScreenLayout'; 
+import { User, UserPlus, Box, Key } from 'lucide-react';
+import Navbar from '../shared/Navbar';
+import ScreenLayout from '../shared/ScreenLayout';
+
+
 // Painel do Administrador/Colaborador
 const AdminDashboard = ({ setView, user, residents }) => {
   return (
