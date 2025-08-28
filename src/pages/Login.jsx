@@ -1,9 +1,9 @@
 import React, { useState, useContext } from 'react';
 import { doc, getDoc } from 'firebase/firestore';
-import { AuthContext } from '../context/AuthContext';
-import Card from '../components/shared/Card';
-import InputField from '../components/shared/InputField';
-import ScreenLayout from '../components/shared/ScreenLayout';
+import AuthContext from '@/context/AuthContext';
+import Card from '@/components/shared/Card';
+import InputField from '@/components/shared/InputField';
+import ScreenLayout from '@/components/shared/ScreenLayout';
 
 const Login = ({ setView, db, appId, setUser }) => {
   const [email, setEmail] = useState('');

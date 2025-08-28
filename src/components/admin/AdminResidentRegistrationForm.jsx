@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { doc, setDoc } from 'firebase/firestore';
-import Navbar from '../shared/Navbar';
-import ScreenLayout from '../shared/ScreenLayout';
-import Card from '../shared/Card';
-import InputField from '../shared/InputField';
+import Navbar from '@/shared/Navbar';
+import ScreenLayout from '@/shared/ScreenLayout';
+import Card from '@/shared/Card';
+import InputField from '@/shared/InputField';
 
 // Formulário de Cadastro de Morador (para o Admin)
 const AdminResidentRegistrationForm = ({ setView, db, appId }) => {
