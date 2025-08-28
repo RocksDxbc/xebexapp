@@ -1,69 +1,110 @@
 import React, { useState } from 'react';
-import { doc, setDoc } from 'firebase/firestore';
-import Navbar from '@/shared/Navbar';
-import ScreenLayout from '@/shared/ScreenLayout';
-import Card from '@/shared/Card';
-import InputField from '@/shared/InputField';
+import { collection, addDoc } from 'firebase/firestore';
+import Navbar from '../shared/Navbar';
+import ScreenLayout from '../shared/ScreenLayout';
+import Card from '../shared/Card';
+import InputField from '../shared/InputField';
+import { Box } from 'lucide-react';
+import { AuthContext } from '../../context/AuthContext';
 
-// Formulário de Cadastro de Funcionário (para o Admin)
-const AdminStaffRegistrationForm = ({ setView, db, appId }) => {
-  const [name, setName] = useState('');
-  const [role, setRole] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+const AdminPackageRegistrationForm = ({ setView, db, appId, residents }) => {
+  const [residentId, setResidentId] = useState('');
+  const [itemType, setItemType] = useState('');
+  const [image, setImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
-  const roles = ['Porteiro', 'Recepcionista', 'Ronda Diurno', 'Ronda Noturno', 'Zelador', 'Admin'];
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImage(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      setImage(null);
+      setImagePreview(null);
+    }
+  };
 
   const handleRegister = async (e) => {
     e.preventDefault();
     setMessage('');
     setError('');
 
-    const newUid = `staff-${Math.random().toString(36).substring(2, 15)}`;
+    if (!residentId || !itemType) {
+      setError('Por favor, preencha todos os campos obrigatórios.');
+      return;
+    }
 
     try {
-      const userDocRef = doc(db, 'artifacts', appId, 'users', newUid);
-      await setDoc(userDocRef, {
-        profile: {
-          name,
-          role: role.toLowerCase(),
-          email,
-          password,
-        }
+      const packagesCollectionRef = collection(db, `artifacts/${appId}/packages`);
+      await addDoc(packagesCollectionRef, {
+        residentId,
+        itemType,
+        date: new Date().toISOString(),
+        imageUrl: imagePreview || null,
+        status: 'received',
       });
-      setMessage('Funcionário cadastrado com sucesso!');
-      setName('');
-      setRole('');
-      setEmail('');
-      setPassword('');
+      setMessage('Encomenda registrada com sucesso! Notificação enviada ao morador.');
+      
+      setResidentId('');
+      setItemType('');
+      setImage(null);
+      setImagePreview(null);
     } catch (e) {
-      console.error("Erro ao registrar funcionário:", e);
-      setError('Erro ao registrar funcionário. Tente novamente.');
+      console.error("Erro ao registrar encomenda:", e);
+      setError('Erro ao registrar encomenda. Tente novamente.');
     }
   };
 
   return (
     <>
-      <Navbar title="Cadastrar Funcionário" setView={setView} />
+      <Navbar title="Registrar Encomenda" setView={setView} />
       <ScreenLayout>
-        <Card title="Cadastrar Funcionário">
+        <Card title="Registrar Encomenda">
           <form onSubmit={handleRegister}>
-            <InputField label="Nome Completo" value={name} onChange={(e) => setName(e.target.value)} required />
             <div className="mb-4">
-              <label className="block text-sm font-medium mb-1">Cargo</label>
+              <label className="block text-sm font-medium mb-1">Morador</label>
               <select
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
+                value={residentId}
+                onChange={(e) => setResidentId(e.target.value)}
                 required
                 className="w-full px-3 py-2 border rounded-md"
               >
-                <option value="">Selecione o Cargo</option>
-                {roles.map(r => <option key={r} value={r}>{r}</option>)}
+                <option value="">Selecione o Morador</option>
+                {residents.map(r => (
+                  <option key={r.id} value={r.id}>
+                    {r.name} - Apt. {r.apartment}
+                  </option>
+                ))}
               </select>
             </div>
-            <InputField label="E-mail" type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-            <InputField label="Senha Temporária" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+            <InputField
+              label="Tipo de Item"
+              value={itemType}
+              onChange={(e) => setItemType(e.target.value)}
+              placeholder="Ex: Carta, Caixa pequena, etc."
+              required
+            />
+            <div className="mb-4">
+              <label className="block text-sm font-medium mb-1">Imagem do Item</label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+                className="w-full"
+              />
+              {imagePreview && (
+                <div className="mt-2 text-center">
+                  <img src={imagePreview} alt="Preview" className="w-full h-auto rounded-md shadow-md" />
+                  <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Pré-visualização da imagem</p>
+                </div>
+              )}
+            </div>
             
             {message && <p className="text-green-500 text-center mb-4">{message}</p>}
             {error && <p className="text-red-500 text-center mb-4">{error}</p>}
@@ -72,7 +113,7 @@ const AdminStaffRegistrationForm = ({ setView, db, appId }) => {
               type="submit"
               className="w-full bg-blue-500 text-white py-2 rounded-md font-semibold hover:bg-blue-600 transition"
             >
-              Cadastrar
+              Registrar
             </button>
             <button
               onClick={() => setView('admin-dashboard')}
@@ -87,4 +128,4 @@ const AdminStaffRegistrationForm = ({ setView, db, appId }) => {
   );
 };
 
-export default AdminStaffRegistrationForm;
+export default AdminPackageRegistrationForm;

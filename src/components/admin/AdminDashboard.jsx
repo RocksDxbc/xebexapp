@@ -1,9 +1,10 @@
 import React from 'react';
 import { User, UserPlus, Box, Key } from 'lucide-react';
-import Navbar from '@/shared/Navbar';
-import ScreenLayout from '@/shared/ScreenLayout';
+import Navbar from '../shared/Navbar';
+import ScreenLayout from '../shared/ScreenLayout';
+import Card from '../shared/Card';
+import InputField from '../shared/InputField';
 
-// Painel do Administrador/Colaborador
 const AdminDashboard = ({ setView, user, residents }) => {
   return (
     <>
@@ -72,5 +73,4 @@ const AdminDashboard = ({ setView, user, residents }) => {
     </>
   );
 };
-
 export default AdminDashboard;

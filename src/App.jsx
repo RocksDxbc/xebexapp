@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext, useContext } from 'react';
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithCustomToken, onAuthStateChanged, signInAnonymously } from 'firebase/auth';
 import { getFirestore, doc, onSnapshot, collection, query, where } from 'firebase/firestore';
-
-// Componentes da aplicação
+import { User, Package, Home, LogOut, Plus, Building, Box, Key, Trash, Check, X, UserPlus } from 'lucide-react';
 import { AuthContext } from './context/AuthContext';
 import Login from './pages/Login';
 import ResidentRegistrationForm from './components/resident/ResidentRegistrationForm';
@@ -13,12 +12,10 @@ import AdminStaffRegistrationForm from './components/admin/AdminStaffRegistratio
 import AdminPackageRegistrationForm from './components/admin/AdminPackageRegistrationForm';
 import ResidentDashboard from './components/resident/ResidentDashboard';
 
-// Use as variáveis globais do Firebase fornecidas pelo ambiente
 const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
 const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
 const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
 
-// Componente principal que gerencia o estado da aplicação e as visualizações
 const App = () => {
   const [user, setUser] = useState(null);
   const [db, setDb] = useState(null);
@@ -27,7 +24,6 @@ const App = () => {
   const [loading, setLoading] = useState(true);
   const [residents, setResidents] = useState([]);
 
-  // useEffect para inicializar o Firebase e autenticar
   useEffect(() => {
     const initFirebase = async () => {
       try {
@@ -37,7 +33,6 @@ const App = () => {
         setAuth(authInstance);
         setDb(dbInstance);
 
-        // Autenticar com o token personalizado ou anonimamente
         if (initialAuthToken) {
           await signInWithCustomToken(authInstance, initialAuthToken);
         } else {
@@ -47,33 +42,26 @@ const App = () => {
         onAuthStateChanged(authInstance, (currentUser) => {
           if (currentUser) {
             setUser(currentUser);
-            // Simular o carregamento do perfil do usuário
             fetchUserProfile(currentUser.uid, dbInstance);
           } else {
             setUser(null);
             setLoading(false);
           }
         });
-
       } catch (error) {
         console.error("Erro ao inicializar Firebase:", error);
         setLoading(false);
       }
     };
-
     initFirebase();
   }, []);
 
-  // Função para buscar o perfil do usuário (morador ou admin)
   const fetchUserProfile = async (uid, dbInstance) => {
     const userDocRef = doc(dbInstance, 'artifacts', appId, 'users', uid);
     const unsubscribe = onSnapshot(userDocRef, (docSnap) => {
       if (docSnap.exists()) {
         const profile = docSnap.data().profile;
-        setUser(prevUser => ({
-          ...prevUser,
-          profile
-        }));
+        setUser(prevUser => ({ ...prevUser, profile }));
         if (profile.role === 'resident') {
           setView('resident-dashboard');
         } else if (profile.role === 'admin' || profile.role === 'staff') {
@@ -92,7 +80,6 @@ const App = () => {
     return unsubscribe;
   };
 
-  // Função para buscar a lista de moradores (para admins)
   useEffect(() => {
     if (db && user && (user.profile?.role === 'admin' || user.profile?.role === 'staff')) {
       const usersCollectionRef = collection(db, `artifacts/${appId}/users`);
