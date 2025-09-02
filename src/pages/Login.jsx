@@ -50,6 +50,7 @@ const Login = ({ setView, db, appId, setUser }) => {
     }
   };
 
+  // Se o usuário já estiver autenticado, redireciona para o dashboard apropriado
   return (
     <ScreenLayout>
       <Card title="Login">
