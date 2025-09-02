@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { doc } from 'firebase/firestore';
-import Card from '../components/shared/Card';
-import InputField from '../components/shared/InputField';
-import ScreenLayout from '../components/shared/ScreenLayout';
-import { collection, query, where, onSnapshot, doc, updateDoc } from 'firebase';
-
-// Formulário de Cadastro de Morador (para o Admin)
+import { doc, setDoc } from 'firebase/firestore';
+import Navbar from '../shared/Navbar';
+import ScreenLayout from '../shared/ScreenLayout';
+import Card from '../shared/Card';
+import InputField from '../shared/InputField';
+import { AuthContext } from '../../context/AuthContext';
 const AdminResidentRegistrationForm = ({ setView, db, appId }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');

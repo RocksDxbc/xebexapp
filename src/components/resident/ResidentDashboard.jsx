@@ -1,7 +1,10 @@
-import { useState, useEffect } from 'react';
-import { collection, query, where, onSnapshot, doc, updateDoc } from 'firebase';
+import React, { useState, useEffect, useContext } from 'react';
+import { collection, query, where, onSnapshot, updateDoc, doc } from 'firebase/firestore';
+import { Box, Check } from 'lucide-react';
+import { AuthContext } from '../../context/AuthContext';
+import Navbar from '../shared/Navbar';
+import ScreenLayout from '../shared/ScreenLayout';
 
-// Painel do Morador
 const ResidentDashboard = ({ setView, user, db, appId }) => {
   const [packages, setPackages] = useState([]);
   const [showModal, setShowModal] = useState(false);

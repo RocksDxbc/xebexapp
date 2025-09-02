@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { AuthContext } from '../context/AuthContext';
-import Card from '../components/shared/Card';
-import InputField from '../components/shared/InputField';
-import ScreenLayout from '../components/shared/ScreenLayout';
-import { collection } from 'firebase';
+import { collection, addDoc } from 'firebase/firestore';
+import Navbar from '../shared/Navbar';
+import ScreenLayout from '../shared/ScreenLayout';
+import Card from '../shared/Card';
+import InputField from '../shared/InputField';
+import { Box } from 'lucide-react';
 
 // Formulário de Cadastro de Encomenda (para o Admin)
 const AdminPackageRegistrationForm = ({ setView, db, appId, residents }) => {
