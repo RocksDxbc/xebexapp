@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { collection, addDoc } from 'firebase/firestore';
-import Navbar from '@/shared/Navbar';
-import ScreenLayout from '@/shared/ScreenLayout';
-import Card from '@/shared/Card';
-import InputField from '@/shared/InputField';
+import Navbar from '../shared/Navbar';
+import ScreenLayout from '../shared/ScreenLayout';
+import Card from '../shared/Card';
+import InputField from '../shared/InputField';
 import { Box } from 'lucide-react';
 
 // Formulário de Cadastro de Encomenda (para o Admin)

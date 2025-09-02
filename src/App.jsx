@@ -24,6 +24,16 @@ const App = () => {
   const [loading, setLoading] = useState(true);
   const [residents, setResidents] = useState([]);
 
+  // Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyB6asR4j3emEGaNJgaWsYjydLA6LBNQpLs",
+  authDomain: "appcorrespondenciabd.firebaseapp.com",
+  projectId: "appcorrespondenciabd",
+  storageBucket: "appcorrespondenciabd.firebasestorage.app",
+  messagingSenderId: "456234240689",
+  appId: "1:456234240689:web:9fee39e22b6fe40f13f090"
+};
+
   useEffect(() => {
     const initFirebase = async () => {
       try {
