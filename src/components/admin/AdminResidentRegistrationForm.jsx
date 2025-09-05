@@ -5,6 +5,7 @@ import ScreenLayout from '../shared/ScreenLayout';
 import Card from '../shared/Card';
 import InputField from '../shared/InputField';
 import { AuthContext } from '../../context/AuthContext';
+
 const AdminResidentRegistrationForm = ({ setView, db, appId }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
