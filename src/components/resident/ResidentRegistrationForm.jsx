@@ -15,7 +15,7 @@ const ResidentRegistrationForm = ({ setView, db, appId, auth }) => {
   const [error, setError] = useState('');
 
   const towers = Array.from({ length: 2 }, (_, i) => i + 1);
-  const apartments = Array.from({ length: 22 * 8 }, (_, i) => i + 1);
+  const apartments = Array.from({ length: 23 * 8 }, (_, i) => i + 1);
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -62,7 +62,7 @@ const ResidentRegistrationForm = ({ setView, db, appId, auth }) => {
               value={tower}
               onChange={(e) => setTower(e.target.value)}
               required
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition"
+              className="w-full px-3 py-2 border border-pink-500 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 dark:bg-gray-700 text-red-500 dark:text-gray-100 transition"
             >
               <option value="">Selecione a Torre</option>
               {towers.map(t => <option key={t} value={t}>Torre {t}</option>)}
@@ -74,7 +74,7 @@ const ResidentRegistrationForm = ({ setView, db, appId, auth }) => {
               value={apartment}
               onChange={(e) => setApartment(e.target.value)}
               required
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition"
+              className="w-full px-3 py-2 border border-pink-500 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 dark:bg-gray-700 text-red-500 dark:text-gray-100 transition"
             >
               <option value="">Selecione o Apartamento</option>
               {apartments.map(a => <option key={a} value={a}>Apt. {a}</option>)}
@@ -84,13 +84,13 @@ const ResidentRegistrationForm = ({ setView, db, appId, auth }) => {
           {error && <p className="text-red-500 text-center mb-4">{error}</p>}
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 rounded-md font-semibold hover:bg-blue-600 transition"
+            className="w-full bg-blue-500 text-white py-2 rounded-md font-semibold hover:bg-green-500 transition"
           >
             Cadastrar
           </button>
         </form>
         <div className="mt-4 text-center">
-          <button onClick={() => setView('login')} className="text-sm text-blue-500 hover:underline">
+          <button onClick={() => setView('login')} className="text-sm text-pink-500 hover:underline">
             Já tem uma conta? Voltar ao Login
           </button>
         </div>

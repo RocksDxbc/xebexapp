@@ -128,7 +128,7 @@ todo: 'É PRECISO FAZER O MODAL DE ONDE O A ENCOMENDA ESTÁ DEPÓSITO OU PORTARI
             <p className="text-gray-700 dark:text-gray-300 mb-4">{modalMessage}</p>
             <button
               onClick={() => setShowModal(false)}
-              className="w-full bg-blue-500 text-white py-2 rounded-md font-semibold hover:bg-blue-600 transition"
+              className="w-full bg-blue-500 text-white py-2 rounded-md font-semibold hover:bg--600 transition"
             >
               Entendi
             </button>
