@@ -64,7 +64,7 @@ const Login = ({ setView, db, appId, setUser }) => {
   // Se o usuário já estiver autenticado, redireciona para o dashboard apropriado
   return (
     <ScreenLayout>
-      <Card title="Login">
+      <Card title="Acessa ai seu Legumes">
         <form onSubmit={handleLogin}>
           <InputField
             label="E-mail"
@@ -93,7 +93,7 @@ const Login = ({ setView, db, appId, setUser }) => {
         <div className="mt-4 text-center">
           <button
             onClick={() => setView('resident-registration')}
-            className="text-sm text-blue-500 hover:underline"
+            className="text-sm text-pink-400 hover:underline"
           >
             Não tem uma conta? Cadastre-se
           </button>
