@@ -50,6 +50,17 @@ const Login = ({ setView, db, appId, setUser }) => {
     }
   };
 
+  todo: 'ADICIONAR A VERIFICAÇÃO DE EMAIL SE O EMAIL ESTIVER CADASTRADO NO FIREBASE AUTHENTICATION';
+
+  if (user && user.profile) {
+    if (user.profile.role === 'resident') {
+      setView('resident-dashboard');
+    } else if (user.profile.role === 'admin' || user.profile.role === 'staff') {
+      setView('admin-dashboard');
+    }
+    return null; // Evita renderizar o formulário de login enquanto redireciona
+  } 
+
   // Se o usuário já estiver autenticado, redireciona para o dashboard apropriado
   return (
     <ScreenLayout>

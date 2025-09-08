@@ -1,7 +1,7 @@
 import React, { useState, useEffect, createContext, useContext } from 'react';
 import { initializeApp } from 'firebase/app';
-import { getAuth, signInWithCustomToken, onAuthStateChanged, signInAnonymously } from 'firebase/auth';
-import { getFirestore, doc, onSnapshot, collection, query, where } from 'firebase/firestore';
+import { getAuth, signInWithCustomToken, onAuthStateChanged, signInAnonymously, createUserWithEmailAndPassword,signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { getFirestore, doc, onSnapshot, collection, query, where,getDoc, setDoc, addDoc, updateDoc, deleteDoc, getDocs, serverTimestamp, Timestamp } from 'firebase/firestore';
 import { User, Package, Home, LogOut, Plus, Building, Box, Key, Trash, Check, X, UserPlus } from 'lucide-react';
 import { AuthContext } from './context/AuthContext';
 import Login from './pages/Login';
@@ -14,7 +14,7 @@ import ResidentDashboard from './components/resident/ResidentDashboard';
 
 const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
 const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+const appId = typeof __app_id !== 'undefined' ? __app_id : 'condominioXebec-app-id';
 
 const App = () => {
   const [user, setUser] = useState(null);

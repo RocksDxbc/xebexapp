@@ -68,13 +68,13 @@ const ResidentDashboard = ({ setView, user, db, appId }) => {
     received: 'Recebido - Pendente de Retirada',
     picked_up: 'Retirado',
   };
-
+todo: 'É PRECISO FAZER O MODAL DE ONDE O A ENCOMENDA ESTÁ DEPÓSITO OU PORTARIA, ASSIM QUE A ENCOMENDA FOR ENVIADA PARA O DEPÓSITO É PRECISO ATUALIZAR ESSA FLAG NO SISTEMA/APP'
   return (
     <>
       <Navbar title="Minhas Encomendas" setView={setView} />
       <ScreenLayout>
         <div className="w-full max-w-4xl p-6 rounded-lg bg-white dark:bg-gray-800 shadow-xl">
-          <h2 className="text-2xl font-bold mb-4 text-center">Olá, {user?.profile?.name || 'Morador'}!</h2>
+          <h2 className="text-2xl font-bold mb-4 text-center">Olá, {user?.profile?.name || 'Morador do apartamwnro'}!</h2>
           <p className="text-gray-600 dark:text-gray-400 text-center mb-6">
             Confira as encomendas e correspondências recebidas para você.
           </p>
@@ -120,7 +120,7 @@ const ResidentDashboard = ({ setView, user, db, appId }) => {
           </div>
         </div>
       </ScreenLayout>
-      
+     
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl max-w-sm w-full">
