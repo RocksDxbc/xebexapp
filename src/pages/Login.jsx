@@ -85,7 +85,7 @@ const Login = ({ setView, db, appId, setUser }) => {
           {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 rounded-md font-semibold hover:bg-blue-600 transition"
+            className="w-full bg-blue-500 text-white py-2 rounded-md font-semibold hover:bg-green-500 transition"
           >
             Entrar
           </button>
