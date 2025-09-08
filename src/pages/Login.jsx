@@ -14,8 +14,9 @@ const Login = ({ setView, db, appId, setUser }) => {
   const handleLogin = async (e) => {
     e.preventDefault();
     setError('');
-
-    if (!user) {
+// CORRIGIR A FORMA COMO O USUÁRIO É AUTENTICADO, POIS ATUALMENTE ESTÁ APENAS VERIFICANDO O EMAIL E SENHA NO FIRESTORE E NÃO ESTÁ FUNCIONANDO
+// TODA PARTE DE AUTENTICAÇÃO DEVERIA SER FEITA PELO FIREBASE AUTHENTICATION E NÃO PELO FIRESTORE
+if (!user) {
       setError('Usuário não autenticado. Tente novamente.');
       return;
     }
