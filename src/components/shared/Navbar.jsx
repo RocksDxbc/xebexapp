@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Home, LogOut, User, Key } from 'lucide-react';
+import { Home, LogOut, User, Key, Lollipop, Luggage, Magnet, MapIcon, MapPinCheck, MapPinHouse, Mars, Martini, MegaphoneIcon } from 'lucide-react';
 import { AuthContext } from '../../context/AuthContext';
 
 const Navbar = ({ title, setView }) => {
@@ -12,7 +12,7 @@ const Navbar = ({ title, setView }) => {
       </div>
       <div className="flex items-center space-x-4">
         {user?.profile?.role === 'resident' && (
-          <button onClick={() => setView('resident-dashboard')} className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+          <button onClick={() => setView('resident-dashboard')} className="p-2 rounded-full hover:bg-yellow-300 dark:hover:bg-gray-700 transition">
             <User />
           </button>
         )}
@@ -21,7 +21,7 @@ const Navbar = ({ title, setView }) => {
             <Key />
           </button>
         )}
-        <button onClick={handleLogout} className="p-2 rounded-full hover:bg-red-200 dark:hover:bg-red-700 transition">
+        <button onClick={handleLogout} className="p-2 rounded-full hover:bg-red-500 dark:hover:bg-gray-700 transition">
           <LogOut />
         </button>
       </div>
